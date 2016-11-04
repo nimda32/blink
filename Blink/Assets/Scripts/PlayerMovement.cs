@@ -4,6 +4,11 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public int speed = 10;
+
+	public Animator animator; // movement animation object
+
+	private SpriteRenderer sr;
+
 	private int jumpHeight = 620;
 	int direction = 0; //0-right, 1-left
 	Vector3 dir = new Vector3(1, 0, 0);
@@ -15,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () 
 	{
 		r = GetComponent<Rigidbody>();
+		sr = GetComponent<SpriteRenderer>();
 	}
 
 	bool isGrounded()
@@ -25,14 +31,22 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		animator.SetBool ("walking", false);
+
 		//Left-Right Movement
 		if(Input.GetKey(KeyCode.A)) {
 			dir += transform.right * Time.deltaTime * -speed;
 			direction = 1;
+			animator.SetBool ("walking", true);
+			sr.flipX = true;
+
 		}
 		else if(Input.GetKey(KeyCode.D)) {
 			dir += transform.right * Time.deltaTime * speed;
 			direction = 0;
+			animator.SetBool ("walking", true);
+			sr.flipX = false;
+
 		}
 		r.MovePosition (transform.position + dir);
 		dir = new Vector3 (0, 0, 0);
