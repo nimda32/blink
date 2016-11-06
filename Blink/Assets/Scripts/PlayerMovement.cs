@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public int speed = 10;
+	bool door1 = false;
 
 	public Animator animator; // movement animation object
 
@@ -94,7 +95,27 @@ public class PlayerMovement : MonoBehaviour {
 					r.MovePosition (transform.position - teleDist);
 				}
 			}
+		}				
+	}
+
+	void OnCollisionEnter (Collision col)
+	{
+		//Used tags so we can easily add in new doors and switches
+		if (col.gameObject.CompareTag("Switch"))
+		{
+			Switch s;
+			s = col.gameObject.GetComponent<Switch> ();
+			s.buttonPress (); //switch is pressed
 		}
-				
+		else if (col.gameObject.CompareTag("Door"))
+		{
+			Door d;
+			d = col.gameObject.GetComponent<Door> ();
+			d.checkSwitches (); //check if all switches have been pressed and update door lock state
+			if (d.isUnlocked ()) 
+			{
+				Debug.Log ("You go through the door into the next level");
+			}
+		}
 	}
 }
