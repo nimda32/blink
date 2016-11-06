@@ -7,14 +7,18 @@ public class Door : MonoBehaviour {
 	bool locked = true; //self explanatory
 	public List<GameObject> switches; //list of switches needed to be pressed for door to unlock
 
+	private Animator anim;
 	// Use this for initialization
 	void Start () {
-	
+		anim = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		checkSwitches ();
+		if (!isUnlocked()) {
+			anim.SetBool ("open", true);
+		}	
 	}
 
 	//Check if all the switches have been pressed
@@ -33,6 +37,7 @@ public class Door : MonoBehaviour {
 			}
 		}
 		locked = !unlock;
+
 	}
 
 	public bool isUnlocked()

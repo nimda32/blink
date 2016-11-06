@@ -4,9 +4,12 @@ using System.Collections;
 public class Switch : MonoBehaviour {
 
 	bool pressed = false;
+
+	private Animator anim; // animation object
+
 	// Use this for initialization
 	void Start () {
-	
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -18,8 +21,11 @@ public class Switch : MonoBehaviour {
 	{
 		if (pressed == false) 
 		{
+//			anim.Play ("switch");
+			anim.SetBool ("flipped", true);
 			pressed = true;
 			Debug.Log (this.gameObject.name + " has been pressed");
+
 		}
 	}
 
