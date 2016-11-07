@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour {
 				Debug.Log ("You go through the door into the next level");
 				Time.timeScale = 0;
 				//move to next level
+				SceneManager.LoadScene("Level2",LoadSceneMode.Single);
 
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
