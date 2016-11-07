@@ -15,8 +15,9 @@ public class Door : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//
 		checkSwitches ();
-		if (!isUnlocked()) {
+		if (isUnlocked()) {
 			anim.SetBool ("open", true);
 		}	
 	}

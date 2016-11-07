@@ -21,7 +21,6 @@ public class Switch : MonoBehaviour {
 	{
 		if (pressed == false) 
 		{
-//			anim.Play ("switch");
 			anim.SetBool ("flipped", true);
 			pressed = true;
 			Debug.Log (this.gameObject.name + " has been pressed");

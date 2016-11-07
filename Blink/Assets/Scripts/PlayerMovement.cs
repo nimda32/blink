@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -101,21 +102,24 @@ public class PlayerMovement : MonoBehaviour {
 	void OnCollisionEnter (Collision col)
 	{
 		//Used tags so we can easily add in new doors and switches
-		if (col.gameObject.CompareTag("Switch"))
-		{
+		if (col.gameObject.CompareTag ("Switch")) {
 			Switch s;
 			s = col.gameObject.GetComponent<Switch> ();
 			s.buttonPress (); //switch is pressed
-		}
-		else if (col.gameObject.CompareTag("Door"))
-		{
+		} else if (col.gameObject.CompareTag ("Door")) {
 			Door d;
 			d = col.gameObject.GetComponent<Door> ();
 			d.checkSwitches (); //check if all switches have been pressed and update door lock state
-			if (d.isUnlocked ()) 
-			{
+
+			if (d.isUnlocked ()) {
 				Debug.Log ("You go through the door into the next level");
+				Time.timeScale = 0;
+				//move to next level
+
 			}
+		} else if (col.gameObject.CompareTag ("DeathPit")) {
+			SceneManager.LoadScene("Level1",LoadSceneMode.Single);
+
 		}
 	}
 }
