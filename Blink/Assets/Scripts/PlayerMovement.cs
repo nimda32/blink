@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
-			SceneManager.LoadScene("Level1",LoadSceneMode.Single);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
 		}
 	}
