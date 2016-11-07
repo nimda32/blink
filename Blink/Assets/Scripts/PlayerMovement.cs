@@ -77,8 +77,21 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				else
 				{
+					
+//					for (float i = transform.position.x; i < teleDist.x; i+=2) {
+
+//						r.transform.position = Vector3.Lerp( transform.position, 
+//							transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
+//						r.AddRelativeForce(transform.position - new Vector3(i,0,0));
+						r.MovePosition (transform.position + teleDist);
+
+//						float smoothTime = .3F;
+//						Vector3 velocity = new Vector3(0,3,0);
+//						r.MovePosition( Vector3.SmoothDamp( transform.position, teleDist, ref velocity, smoothTime ) );
+//					}
+						
 					//otherwise teleport normally
-					r.MovePosition (transform.position + teleDist);
+				
 				}
 			}
 			//teleport left
@@ -113,7 +126,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			if (d.isUnlocked ()) {
 				Debug.Log ("You go through the door into the next level");
-				Time.timeScale = 0;
+//				Time.timeScale = 0;
 				//move to next level
 				SceneManager.LoadScene("Level2",LoadSceneMode.Single);
 
