@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
 	Vector3 dir = new Vector3(1, 0, 0);
 	Vector3 teleDist = new Vector3 (5, 0, 0);
 	Rigidbody r;
+	int index = 0;
 
 
 	// Use this for initialization
@@ -132,8 +133,7 @@ public class PlayerMovement : MonoBehaviour {
 				Debug.Log ("You go through the door into the next level");
 //				Time.timeScale = 0;
 				//move to next level
-				SceneManager.LoadScene("Level2",LoadSceneMode.Single);
-
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
