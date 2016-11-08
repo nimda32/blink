@@ -131,7 +131,6 @@ public class PlayerMovement : MonoBehaviour {
 
 			if (d.isUnlocked ()) {
 				Debug.Log ("You go through the door into the next level");
-//				Time.timeScale = 0;
 				//move to next level
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}

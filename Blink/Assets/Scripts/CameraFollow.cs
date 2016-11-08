@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour {
 	public GameObject cameraTarget; // object to look at or follow
 	public GameObject player; // player object for moving
 
-	public float smoothTime = 0.1f;    // time for dampen
+	public float smoothTime = 1;    // time for dampen
 	public bool cameraFollowX = true; // camera follows on horizontal
 	public bool cameraFollowY = true; // camera follows on vertical
 	public bool cameraFollowHeight = true; // camera follow CameraTarget object height
@@ -25,7 +25,6 @@ public class CameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		//not sure why getting an error for cameraTarget and player, Shouldn't these be the same?
 		if (cameraFollowX)
 		{
 			thisTransform.position = new Vector3(Mathf.SmoothDamp(thisTransform.position.x, cameraTarget.transform.position.x, ref velocity.x, smoothTime), thisTransform.position.y, thisTransform.position.z);
