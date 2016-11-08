@@ -130,7 +130,6 @@ public class PlayerMovement : MonoBehaviour {
 			d.checkSwitches (); //check if all switches have been pressed and update door lock state
 
 			if (d.isUnlocked ()) {
-				Debug.Log ("You go through the door into the next level");
 				//move to next level
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}

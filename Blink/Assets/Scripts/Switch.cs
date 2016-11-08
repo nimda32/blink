@@ -23,7 +23,6 @@ public class Switch : MonoBehaviour {
 		{
 			anim.SetBool ("flipped", true);
 			pressed = true;
-			Debug.Log (this.gameObject.name + " has been pressed");
 
 		}
 	}
