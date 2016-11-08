@@ -78,18 +78,18 @@ public class PlayerMovement : MonoBehaviour {
 				else
 				{
 					
-//					for (float i = transform.position.x; i < teleDist.x; i+=2) {
+//					for (float i = transform.position.x; i < teleDist.x; i++) {
 
-//						r.transform.position = Vector3.Lerp( transform.position, 
-//							transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
-//						r.AddRelativeForce(transform.position - new Vector3(i,0,0));
+						//r.transform.position = Vector3.Lerp( transform.position,transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
+						//r.AddRelativeForce(transform.position - new Vector3(i,0,0));
 						r.MovePosition (transform.position + teleDist);
 
-//						float smoothTime = .3F;
-//						Vector3 velocity = new Vector3(0,3,0);
-//						r.MovePosition( Vector3.SmoothDamp( transform.position, teleDist, ref velocity, smoothTime ) );
+//						float smoothTime = .03F;
+//						r.MovePosition ( transform.position + new Vector3(i,0,0) );
+
 //					}
-						
+
+
 					//otherwise teleport normally
 				
 				}
@@ -109,7 +109,11 @@ public class PlayerMovement : MonoBehaviour {
 					r.MovePosition (transform.position - teleDist);
 				}
 			}
-		}				
+		}
+
+
+
+
 	}
 
 	void OnCollisionEnter (Collision col)
