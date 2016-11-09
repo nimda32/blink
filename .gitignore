@@ -29,3 +29,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Blink/Temp/__Backupscenes/0.backup
+*.backup

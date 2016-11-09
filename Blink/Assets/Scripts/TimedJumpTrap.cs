@@ -21,8 +21,9 @@ public class TimedJumpTrap : MonoBehaviour {
 
 			wall.SetActive( isWallActive );
 			isWallActive = !isWallActive;
-//			Debug.Log ("death is" + isWallActive);
+			//Debug.Log ("death is" + isWallActive);
 			yield return new WaitForSeconds(1f);
+
 		}
 	}
 }
