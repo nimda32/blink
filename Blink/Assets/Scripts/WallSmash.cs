@@ -60,7 +60,7 @@ public class WallSmash : MonoBehaviour {
 	{
 		if (col.gameObject.name.Equals ("Player")) 
 		{
-			if (direction == -1 && delay > 0) 
+			if (direction == -1 && delay <= 0) 
 			{
 				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 			}
