@@ -3,20 +3,22 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
-
+	
+	public int direction = 0; //0-right, 1-left
 	public int speed = 10;
+	private int jumpHeight = 620;
+
 	bool door1 = false;
 
 	public Animator animator; // movement animation object
-
 	private SpriteRenderer sr;
 
-	private int jumpHeight = 620;
-	int direction = 0; //0-right, 1-left
 	Vector3 dir = new Vector3(1, 0, 0);
 	Vector3 teleDist = new Vector3 (5, 0, 0);
 	Rigidbody r;
-	int index = 0;
+
+
+	public AudioClip[] list;
 
 
 	// Use this for initialization
@@ -24,6 +26,11 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		r = GetComponent<Rigidbody>();
 		sr = GetComponent<SpriteRenderer>();
+
+		list = new AudioClip[]{(AudioClip)Resources.Load ("Sounds/footstep.wav"),
+			(AudioClip)Resources.Load ("Sounds/chimes.wav"),
+			(AudioClip)Resources.Load ("Sounds/boing.wav")
+		};
 	}
 
 	bool isGrounded()
@@ -42,6 +49,7 @@ public class PlayerMovement : MonoBehaviour {
 			direction = 1;
 			animator.SetBool ("walking", true);
 			sr.flipX = true;
+	
 
 		}
 		else if(Input.GetKey(KeyCode.D)) {
@@ -111,10 +119,6 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 		}
-
-
-
-
 	}
 
 	void OnCollisionEnter (Collision col)
