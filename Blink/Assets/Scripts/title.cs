@@ -15,6 +15,7 @@ public class title : MonoBehaviour {
 
 	void start_onClick(){
 		SceneManager.LoadScene("Level1",LoadSceneMode.Single);
+		Debug.Log ("Moveto level 1");
 	}
 
 }
