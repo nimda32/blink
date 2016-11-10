@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	public AudioClip walkingSound;
 	public AudioClip jumpingSound;
 	public AudioClip teleportSound;
+	public AudioClip deathSound;
 
 	Vector3 originalPos;
 	// Use this for initialization
