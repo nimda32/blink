@@ -8,6 +8,11 @@ public class PlayerMovement : MonoBehaviour {
 	public int speed = 10;
 	private int jumpHeight = 620;
 
+	public Vector3 initialposition;
+
+
+
+
 	bool door1 = false;
 
 	public Animator animator; // movement animation object
@@ -24,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public AudioClip jumpingSound;
 	public AudioClip teleportSound;
+	public AudioClip deathSound;
 
 
 	// Use this for initialization
@@ -32,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
 		source = GetComponent<AudioSource>();
 		r = GetComponent<Rigidbody>();
 		sr = GetComponent<SpriteRenderer>();
+		initialposition = transform.position;
 
 		//		list = new AudioClip[]{(AudioClip)Resources.Load ("Sounds/footstep.wav"),
 		//			(AudioClip)Resources.Load ("Sounds/chimes.wav"),
@@ -163,7 +170,9 @@ public class PlayerMovement : MonoBehaviour {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			transform.position = initialposition;
+			source.clip = deathSound;
+			source.Play();
 
 		}
 	}
