@@ -172,15 +172,10 @@ public class PlayerMovement : MonoBehaviour {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
-<<<<<<< HEAD
-			//move back to start position
-			transform.position = originalPos;
-=======
+
 			transform.position = initialposition;
 			source.clip = deathSound;
 			source.Play();
-
->>>>>>> 8197a0e9acc727dc08c8e0966c19df47238304bc
 		}
 	}
 }
