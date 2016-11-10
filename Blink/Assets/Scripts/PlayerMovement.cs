@@ -21,9 +21,10 @@ public class PlayerMovement : MonoBehaviour {
 	public AudioSource source;
 	public AudioSource[] list;
 
-	public AudioClip walkingSound;
+
 	public AudioClip jumpingSound;
 	public AudioClip teleportSound;
+
 
 	// Use this for initialization
 	void Start () 
@@ -54,10 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 			direction = 1;
 			animator.SetBool ("walking", true);
 			sr.flipX = true;
-			if (!source.isPlaying) {
-				source.clip = walkingSound;
-				source.Play ();
-			}
+
 
 
 		}
@@ -66,10 +64,7 @@ public class PlayerMovement : MonoBehaviour {
 			direction = 0;
 			animator.SetBool ("walking", true);
 			sr.flipX = false;
-			if (!source.isPlaying) {
-				source.clip = walkingSound;
-				source.Play ();
-			}
+
 		}
 		r.MovePosition (transform.position + dir);
 		dir = new Vector3 (0, 0, 0);
@@ -77,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 		//Jumping
 		if (Input.GetKeyDown (KeyCode.W)) 
 		{
-			if (isGrounded ())
+			if (isGrounded())
 			{
 				r.AddForce(new Vector3(0, jumpHeight, 0));
 				source.clip = jumpingSound;
@@ -95,13 +90,18 @@ public class PlayerMovement : MonoBehaviour {
 				//Check if there's anything in front of you that you might get stuck in
 				if (Physics.Raycast(transform.position, Vector3.right, out hit, 5.0f))
 				{
+					source.time = 1.2f;
 					source.clip = teleportSound;
-					source.PlayOneShot(teleportSound, 1F);
+					source.Play();
+
 					//if there is, stop in front of it
 					r.MovePosition (transform.position + new Vector3(hit.distance, 0, 0));
 				}
 				else
 				{
+					source.time = 1.2f;
+					source.clip = teleportSound;
+					source.Play();
 
 					//					for (float i = transform.position.x; i < teleDist.x; i++) {
 
@@ -125,11 +125,17 @@ public class PlayerMovement : MonoBehaviour {
 				//Check if there's anything in front of you that you might get stuck in
 				if (Physics.Raycast(transform.position, Vector3.left, out hit, 5.0f))
 				{
+					source.time = 1.2f;
+					source.clip = teleportSound;
+					source.Play();
 					//if there is, stop in front of it
 					r.MovePosition (transform.position - new Vector3(hit.distance, 0, 0));
 				}
 				else
 				{
+					source.time = 1.2f;
+					source.clip = teleportSound;
+					source.Play();
 					//otherwise teleport normally
 					r.MovePosition (transform.position - teleDist);
 				}
@@ -144,6 +150,9 @@ public class PlayerMovement : MonoBehaviour {
 			Switch s;
 			s = col.gameObject.GetComponent<Switch> ();
 			s.buttonPress (); //switch is pressed
+				
+
+
 		} else if (col.gameObject.CompareTag ("Door")) {
 			Door d;
 			d = col.gameObject.GetComponent<Door> ();
