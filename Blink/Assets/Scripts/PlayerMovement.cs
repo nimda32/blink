@@ -163,7 +163,6 @@ public class PlayerMovement : MonoBehaviour {
 
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
-
 			transform.position = initialposition;
 			source.clip = deathSound;
 			source.Play();
