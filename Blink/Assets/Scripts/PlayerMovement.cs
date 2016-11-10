@@ -20,10 +20,12 @@ public class PlayerMovement : MonoBehaviour {
 
 	public AudioClip[] list;
 
-
+	Vector3 originalPos;
 	// Use this for initialization
 	void Start () 
 	{
+
+		originalPos = transform.position;
 		r = GetComponent<Rigidbody>();
 		sr = GetComponent<SpriteRenderer>();
 
@@ -138,8 +140,8 @@ public class PlayerMovement : MonoBehaviour {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
+			//move back to start position
+			transform.position = originalPos;
 		}
 	}
 }

@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class WallSmash : MonoBehaviour {
 
+	public GameObject player;
+
 	private int direction = -1; //-1:down, 1:up
 	float upDelay = 1.5f;
 	float downDelay = 0.5f;
@@ -16,8 +18,11 @@ public class WallSmash : MonoBehaviour {
 	bool canMove = true;
 	Rigidbody r;
 
+	Vector3 playersOriginalPosition;
+
 	// Use this for initialization
 	void Start () {
+		playersOriginalPosition = player.transform.position;
 		initialPos = gameObject.transform.position;
 		r = gameObject.GetComponent<Rigidbody> ();
 	}
@@ -62,7 +67,8 @@ public class WallSmash : MonoBehaviour {
 		{
 			if (direction == -1 && delay <= 0) 
 			{
-				SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+				//teleports player to starting position
+				player.transform.position = playersOriginalPosition;
 			}
 		} 
 		else 
