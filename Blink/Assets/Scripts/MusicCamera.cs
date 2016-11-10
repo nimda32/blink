@@ -14,7 +14,6 @@ public class MusicCamera : MonoBehaviour {
 			AudioBegin = true;
 		}
 	
-	
 	}
 
 	// Use this for initialization

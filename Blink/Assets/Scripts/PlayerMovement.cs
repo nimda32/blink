@@ -93,6 +93,10 @@ public class PlayerMovement : MonoBehaviour {
 		//Teleporting
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
+			source.time = 1.2f;
+			source.clip = teleportSound;
+			source.Play();
+
 			RaycastHit hit;
 			//teleport right
 			if (direction == 0)
@@ -100,32 +104,19 @@ public class PlayerMovement : MonoBehaviour {
 				//Check if there's anything in front of you that you might get stuck in
 				if (Physics.Raycast(transform.position, Vector3.right, out hit, 5.0f))
 				{
-					source.time = 1.2f;
-					source.clip = teleportSound;
-					source.Play();
 
 					//if there is, stop in front of it
 					r.MovePosition (transform.position + new Vector3(hit.distance, 0, 0));
+
+			
 				}
 				else
 				{
-					source.time = 1.2f;
-					source.clip = teleportSound;
-					source.Play();
+					//otherwise teleport normally
 
-					//					for (float i = transform.position.x; i < teleDist.x; i++) {
-
-					//r.transform.position = Vector3.Lerp( transform.position,transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
-					//r.AddRelativeForce(transform.position - new Vector3(i,0,0));
 					r.MovePosition (transform.position + teleDist);
 
-					//						float smoothTime = .03F;
-					//						r.MovePosition ( transform.position + new Vector3(i,0,0) );
 
-					//					}
-
-
-					//otherwise teleport normally
 
 				}
 			}
@@ -135,19 +126,17 @@ public class PlayerMovement : MonoBehaviour {
 				//Check if there's anything in front of you that you might get stuck in
 				if (Physics.Raycast(transform.position, Vector3.left, out hit, 5.0f))
 				{
-					source.time = 1.2f;
-					source.clip = teleportSound;
-					source.Play();
 					//if there is, stop in front of it
 					r.MovePosition (transform.position - new Vector3(hit.distance, 0, 0));
+
+			
 				}
 				else
 				{
-					source.time = 1.2f;
-					source.clip = teleportSound;
-					source.Play();
 					//otherwise teleport normally
 					r.MovePosition (transform.position - teleDist);
+
+				
 				}
 			}
 		}
@@ -171,6 +160,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (d.isUnlocked ()) {
 				//move to next level
 				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
 			}
 		} else if (col.gameObject.CompareTag ("DeathPit")) {
 
