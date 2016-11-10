@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
-	
+
 	public int direction = 0; //0-right, 1-left
 	public int speed = 10;
 	private int jumpHeight = 620;
@@ -18,7 +18,12 @@ public class PlayerMovement : MonoBehaviour {
 	Rigidbody r;
 
 
-	public AudioClip[] list;
+	public AudioSource source;
+	public AudioSource[] list;
+
+		public AudioClip walkingSound;
+		public AudioClip jumpingSound;
+		public AudioClip teleportSound;
 
 	Vector3 originalPos;
 	// Use this for initialization
@@ -26,20 +31,22 @@ public class PlayerMovement : MonoBehaviour {
 	{
 
 		originalPos = transform.position;
+
+		source = GetComponent<AudioSource>();
 		r = GetComponent<Rigidbody>();
 		sr = GetComponent<SpriteRenderer>();
 
-		list = new AudioClip[]{(AudioClip)Resources.Load ("Sounds/footstep.wav"),
-			(AudioClip)Resources.Load ("Sounds/chimes.wav"),
-			(AudioClip)Resources.Load ("Sounds/boing.wav")
-		};
+		//		list = new AudioClip[]{(AudioClip)Resources.Load ("Sounds/footstep.wav"),
+		//			(AudioClip)Resources.Load ("Sounds/chimes.wav"),
+		//			(AudioClip)Resources.Load ("Sounds/boing.wav")
+		//		};
 	}
 
 	bool isGrounded()
 	{
 		return (r.velocity.y >= -0.01f && r.velocity.y <= 0.01f);
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -51,7 +58,11 @@ public class PlayerMovement : MonoBehaviour {
 			direction = 1;
 			animator.SetBool ("walking", true);
 			sr.flipX = true;
-	
+			if (!source.isPlaying) {
+				source.clip = walkingSound;
+				source.Play ();
+			}
+
 
 		}
 		else if(Input.GetKey(KeyCode.D)) {
@@ -59,7 +70,10 @@ public class PlayerMovement : MonoBehaviour {
 			direction = 0;
 			animator.SetBool ("walking", true);
 			sr.flipX = false;
-
+			if (!source.isPlaying) {
+				source.clip = walkingSound;
+				source.Play ();
+			}
 		}
 		r.MovePosition (transform.position + dir);
 		dir = new Vector3 (0, 0, 0);
@@ -70,6 +84,8 @@ public class PlayerMovement : MonoBehaviour {
 			if (isGrounded ())
 			{
 				r.AddForce(new Vector3(0, jumpHeight, 0));
+				source.clip = jumpingSound;
+				source.PlayOneShot(jumpingSound, 1F);
 			}
 		}
 
@@ -83,26 +99,28 @@ public class PlayerMovement : MonoBehaviour {
 				//Check if there's anything in front of you that you might get stuck in
 				if (Physics.Raycast(transform.position, Vector3.right, out hit, 5.0f))
 				{
+					source.clip = teleportSound;
+					source.PlayOneShot(teleportSound, 1F);
 					//if there is, stop in front of it
 					r.MovePosition (transform.position + new Vector3(hit.distance, 0, 0));
 				}
 				else
 				{
-					
-//					for (float i = transform.position.x; i < teleDist.x; i++) {
 
-						//r.transform.position = Vector3.Lerp( transform.position,transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
-						//r.AddRelativeForce(transform.position - new Vector3(i,0,0));
-						r.MovePosition (transform.position + teleDist);
+					//					for (float i = transform.position.x; i < teleDist.x; i++) {
 
-//						float smoothTime = .03F;
-//						r.MovePosition ( transform.position + new Vector3(i,0,0) );
+					//r.transform.position = Vector3.Lerp( transform.position,transform.position + new Vector3(i,0,0) , 0.5f * Time.deltaTime );
+					//r.AddRelativeForce(transform.position - new Vector3(i,0,0));
+					r.MovePosition (transform.position + teleDist);
 
-//					}
+					//						float smoothTime = .03F;
+					//						r.MovePosition ( transform.position + new Vector3(i,0,0) );
+
+					//					}
 
 
 					//otherwise teleport normally
-				
+
 				}
 			}
 			//teleport left
